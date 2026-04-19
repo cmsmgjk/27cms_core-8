@@ -224,6 +224,18 @@ function buildDocs(){
 }
 function gC(){try{return JSON.parse(localStorage.getItem('ys27')||'{}')}catch{return{}}}
 function sC(o){try{localStorage.setItem('ys27',JSON.stringify(o))}catch{}}
+function updateProgress(scId){
+  const checks=gC();
+  const el=document.querySelector(`.cls[data-id="${scId}"]`);
+  if(!el)return;
+  let total=0,done=0;
+  Object.entries(DATA.checklist).forEach(([k,items])=>items.forEach((_,i)=>{total++;if(checks[`${scId}_${k}_${i}`])done++}));
+  const pct=total?Math.round(done/total*100):0;
+  const prog=el.querySelector('.chp');
+  const bar=el.querySelector('.cpf');
+  if(prog)prog.textContent=`${done}/${total} · ${pct}%`;
+  if(bar)bar.style.width=pct+'%';
+}
 function buildCL(){
   const w=document.getElementById('tab-cl');
   w.innerHTML='<div style="font-size:12px;color:var(--dim);margin-bottom:12px">학교 이름을 탭하면 펼쳐집니다. 체크 내용은 브라우저에 저장됩니다.</div>';
@@ -232,7 +244,7 @@ function buildCL(){
     let total=0,done=0;
     Object.entries(DATA.checklist).forEach(([k,items])=>items.forEach((_,i)=>{total++;if(checks[`${sc.id}_${k}_${i}`])done++}));
     const pct=total?Math.round(done/total*100):0;
-    const el=document.createElement('div');el.className='cls';
+    const el=document.createElement('div');el.className='cls';el.dataset.id=sc.id;
     const hdr=document.createElement('div');hdr.className='clh';
     hdr.innerHTML=`<span class="chn">${sc.short}</span><span class="chl">${sc.loc}</span><span class="chp">${done}/${total} · ${pct}%</span>`;
     const pbw=document.createElement('div');pbw.className='cpb';const pbf=document.createElement('div');pbf.className='cpf';pbf.style.width=pct+'%';pbw.appendChild(pbf);
@@ -244,7 +256,7 @@ function buildCL(){
         const id=`${sc.id}_${k}_${i}`;
         const row=document.createElement('div');row.className='ci'+(checks[id]?' done':'');
         const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!checks[id];
-        cb.onchange=()=>{const c=gC();c[id]=cb.checked;sC(c);buildCL()};
+        cb.onchange=()=>{const c=gC();c[id]=cb.checked;sC(c);row.classList.toggle('done',cb.checked);updateProgress(sc.id)};
         const txt=document.createElement('span');txt.className='ct';txt.textContent=text;
         row.appendChild(cb);row.appendChild(txt);body.appendChild(row);
       });
