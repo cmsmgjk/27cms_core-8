@@ -17,10 +17,11 @@ header{background:var(--mg-black);position:sticky;top:0;z-index:100;box-shadow:0
 .hm{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
 .mt{font-size:11px;color:#8A9BB0}
 .mn{font-size:11px;color:var(--blue-light);font-weight:600}
-nav{background:var(--surface);border-bottom:2px solid var(--border);display:flex;padding:0 12px;overflow-x:auto}
-nav button{background:none;border:none;border-bottom:2px solid transparent;color:var(--dim);font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:600;padding:11px 14px;cursor:pointer;white-space:nowrap;transition:.15s;margin-bottom:-2px}
-nav button.on{color:var(--blue);border-bottom-color:var(--blue)}
-nav button:hover:not(.on){color:var(--text)}
+nav{background:var(--surface);border-bottom:1.5px solid var(--border);display:flex;align-items:center;padding:0 16px;height:42px;overflow-x:auto}
+.nav-item{font-size:12px;font-weight:600;color:var(--dim);cursor:pointer;white-space:nowrap;padding:0 2px;transition:.15s}
+.nav-item.on{color:var(--blue)}
+.nav-item:hover:not(.on){color:var(--text)}
+.nav-sep{color:var(--border2);font-size:12px;margin:0 10px;user-select:none}
 .content{padding:14px 14px 40px;max-width:680px;margin:0 auto}
 .tab{display:none}.tab.on{display:block}
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:12px;color:var(--faint)}
@@ -98,27 +99,27 @@ nav button:hover:not(.on){color:var(--text)}
 .isl{color:var(--faint);min-width:90px;flex-shrink:0;font-size:11px}
 .isd{font-weight:600;flex:1}
 /* ── HEADER REDESIGN ── */
-.hi{display:flex;align-items:center;gap:0;padding:0;position:relative;overflow:hidden;min-height:64px}
-.hi::before{content:'CORE-8';position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:72px;font-weight:900;color:rgba(255,255,255,.04);letter-spacing:-2px;pointer-events:none;line-height:1}
-.header-left{display:flex;flex-direction:column;justify-content:center;padding:10px 14px;border-right:1px solid rgba(255,255,255,.08);min-width:54px;align-items:center;gap:3px}
-.cms-logo{background:var(--blue-mid);color:#fff;font-size:11px;font-weight:900;padding:3px 8px;border-radius:4px;letter-spacing:.5px}
-.cms-year{font-size:10px;color:rgba(255,255,255,.35);font-weight:700;letter-spacing:.5px}
-.header-center{flex:1;padding:10px 14px;display:flex;flex-direction:column;gap:3px}
-.header-project{font-size:10px;font-weight:700;color:var(--blue-light);letter-spacing:1px;text-transform:uppercase;opacity:.8}
-.header-title-row{display:flex;align-items:center;gap:8px}
-.ht{font-size:15px;font-weight:900;color:#fff;line-height:1.2;letter-spacing:-.3px}
-.ht span{color:var(--blue-light)}
-.core-badge{font-size:14px;font-weight:900;background:rgba(83,172,255,.15);border:1px solid rgba(83,172,255,.3);color:var(--blue-light);padding:1px 4px;border-radius:3px;letter-spacing:.8px;flex-shrink:0}
+.hi{display:flex;align-items:center;gap:0;padding:0;position:relative;overflow:hidden;min-height:58px}
+.hi::before{content:'CORE-8';position:absolute;right:-6px;top:50%;transform:translateY(-50%);font-size:64px;font-weight:900;color:rgba(255,255,255,.04);letter-spacing:-2px;pointer-events:none;line-height:1}
+.header-left{display:flex;flex-direction:column;justify-content:center;padding:10px 14px;border-right:1px solid rgba(255,255,255,.08);min-width:52px;align-items:center;gap:3px}
+.cms-year-label{font-size:8px;font-weight:700;color:#fff;letter-spacing:1.2px}
+.cms-year{font-size:15px;font-weight:900;color:#B4A89B;letter-spacing:1px}
+.header-center{flex:1;padding:10px 14px;display:flex;flex-direction:column;gap:1px}
+.header-project{font-size:10px;font-weight:400;color:#D0C8BE;letter-spacing:1.2px}
+.header-title-row{display:flex;align-items:center;gap:7px}
+.ht{font-size:18px;font-weight:900;color:#fff;line-height:1.2;letter-spacing:-.3px}
+.ht span{color:#B4A89B}
+.core-badge{font-size:14px;font-weight:900;background:rgba(180,168,155,.15);border:1px solid rgba(180,168,155,.35);color:#B4A89B;padding:0 4px;border-radius:3px;letter-spacing:.8px;flex-shrink:0;line-height:1.4}
 .header-right{padding:10px 14px;display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0}
-.mt{font-size:10px;color:rgba(255,255,255,.35)}
-.mn{font-size:11px;color:var(--blue-light);font-weight:600;text-align:right}.etm{font-size:11px;font-weight:500;color:var(--blue);margin-left:2px}
+.mt{font-size:10px;color:rgba(255,255,255,.3)}
+.mn{font-size:10px;color:#B4A89B;font-weight:600;text-align:right}.etm{font-size:11px;font-weight:500;color:var(--blue);margin-left:2px}
 </style>
 </head>
 <body>
 <header>
   <div class="hi">
     <div class="header-left">
-      <span class="cms-logo">CMS</span>
+      <span class="cms-year-label">CREVERSE</span>
       <span class="cms-year">2027</span>
     </div>
     <div class="header-center">
@@ -135,10 +136,13 @@ nav button:hover:not(.on){color:var(--text)}
   </div>
 </header>
 <nav>
-  <button class="on" onclick="switchTab('tl',this)">📅 전형 일정</button>
-  <button onclick="switchTab('docs',this)">📋 서류 준비</button>
-  <button onclick="switchTab('cl',this)">✅ 체크리스트</button>
-  <button onclick="switchTab('info',this)">ℹ️ 학교 정보</button>
+  <span class="nav-item on" onclick="switchTab('tl',this)">전형 일정</span>
+  <span class="nav-sep">|</span>
+  <span class="nav-item" onclick="switchTab('docs',this)">서류 준비</span>
+  <span class="nav-sep">|</span>
+  <span class="nav-item" onclick="switchTab('cl',this)">체크리스트</span>
+  <span class="nav-sep">|</span>
+  <span class="nav-item" onclick="switchTab('info',this)">학교 정보</span>
 </nav>
 <div class="content">
   <div id="tab-tl" class="tab on"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
@@ -146,6 +150,9 @@ nav button:hover:not(.on){color:var(--text)}
   <div id="tab-cl" class="tab"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
   <div id="tab-info" class="tab"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
 </div>
+<footer style="text-align:right;padding:10px 16px;background:var(--surface2);border-top:1px solid var(--border)">
+  <span style="font-size:10px;color:var(--gold);letter-spacing:.3px">made by <b style="color:var(--gold2);font-weight:600">JK</b></span>
+</footer>
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwoIg5ZVDXBdxN-HsLvUnbM9tqj-2hWebm70dIl-QcERUGTLhVxfQhw2XHw0IMwzx4q/exec';
 
@@ -275,7 +282,7 @@ function buildInfo(){
     w.appendChild(card);
   });
 }
-function switchTab(id,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');btn.classList.add('on')}
+function switchTab(id,el){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');el.classList.add('on')}
 </script>
 </body>
 </html>
