@@ -97,14 +97,39 @@ nav button:hover:not(.on){color:var(--text)}
 .isr{display:flex;gap:8px;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);align-items:center}.isr:last-child{border-bottom:none}
 .isl{color:var(--faint);min-width:90px;flex-shrink:0;font-size:11px}
 .isd{font-weight:600;flex:1}
+
+/* ── HEADER REDESIGN ── */
+.hi{display:flex;align-items:center;gap:0;padding:0;position:relative;overflow:hidden;min-height:64px}
+.hi::before{content:'CORE-8';position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:72px;font-weight:900;color:rgba(255,255,255,.04);letter-spacing:-2px;pointer-events:none;line-height:1}
+.header-left{display:flex;flex-direction:column;justify-content:center;padding:10px 14px;border-right:1px solid rgba(255,255,255,.08);min-width:54px;align-items:center;gap:3px}
+.cms-logo{background:var(--blue-mid);color:#fff;font-size:11px;font-weight:900;padding:3px 8px;border-radius:4px;letter-spacing:.5px}
+.cms-year{font-size:10px;color:rgba(255,255,255,.35);font-weight:700;letter-spacing:.5px}
+.header-center{flex:1;padding:10px 14px;display:flex;flex-direction:column;gap:3px}
+.header-project{font-size:10px;font-weight:700;color:var(--blue-light);letter-spacing:1px;text-transform:uppercase;opacity:.8}
+.header-title-row{display:flex;align-items:center;gap:8px}
+.ht{font-size:15px;font-weight:900;color:#fff;line-height:1.2;letter-spacing:-.3px}
+.ht span{color:var(--blue-light)}
+.core-badge{font-size:9px;font-weight:900;background:rgba(83,172,255,.15);border:1px solid rgba(83,172,255,.3);color:var(--blue-light);padding:2px 7px;border-radius:3px;letter-spacing:.8px;flex-shrink:0}
+.header-right{padding:10px 14px;display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0}
+.mt{font-size:10px;color:rgba(255,255,255,.35)}
+.mn{font-size:11px;color:var(--blue-light);font-weight:600;text-align:right}
 </style>
 </head>
 <body>
 <header>
   <div class="hi">
-    <span class="cms-logo">CMS</span>
-    <div class="ht"><span>2027</span> 영재학교 입학전형</div>
-    <div class="hm">
+    <div class="header-left">
+      <span class="cms-logo">CMS</span>
+      <span class="cms-year">2027</span>
+    </div>
+    <div class="header-center">
+      <div class="header-project">영재학교 입학전형</div>
+      <div class="header-title-row">
+        <div class="ht"><span>크레버스</span> 영재학교</div>
+        <span class="core-badge">CORE-8</span>
+      </div>
+    </div>
+    <div class="header-right">
       <div class="mt" id="todayStr"></div>
       <div class="mn" id="nextEvt">로딩 중…</div>
     </div>
