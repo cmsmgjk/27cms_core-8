@@ -65,7 +65,7 @@ nav{background:var(--surface);border-bottom:1.5px solid var(--border);display:fl
 .en{display:inline-block;background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:1px 8px;border-radius:3px;margin-bottom:5px}
 .eq{font-size:13px;font-weight:500;color:var(--text);line-height:1.55}
 .el{font-size:11px;color:var(--gold2);margin-top:5px;font-weight:600;background:var(--gold-bg);display:inline-block;padding:2px 8px;border-radius:3px}
-.rt{width:100%;border-collapse:collapse}.rt th{background:var(--surface2);font-size:11px;font-weight:700;color:var(--dim);padding:6px 10px;text-align:left;border-bottom:1.5px solid var(--border)}.rt td{font-size:12px;padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}.rt tr:last-child td{border-bottom:none}
+.rt{width:100%;border-collapse:collapse;table-layout:fixed}.rt th{background:var(--surface2);font-size:11px;font-weight:700;color:var(--dim);padding:6px 10px;text-align:left;border-bottom:1.5px solid var(--border)}.rt th:first-child{width:120px}.rt td{font-size:12px;padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5;word-break:keep-all}.rt td:first-child{width:120px}.rt tr:last-child td{border-bottom:none}
 .rty{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:2px}
 .rt-t{background:var(--blue-bg);color:var(--blue)}.rt-s{background:var(--gold-bg);color:var(--gold2)}
 .sbr{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);align-items:flex-start}.sbr:last-child{border-bottom:none}
@@ -210,7 +210,7 @@ function buildTL(){
 }
 function buildDocs(){
   const w=document.getElementById('tab-docs');
-  w.innerHTML='<div class="nb"><b>📌 서류 준비 가이드</b><br>KSA·서울과고·경기과고는 2027 요강 확인 완료. 나머지 학교는 예년 기준이므로 <b>원서접수 전 반드시 각 학교 공식 요강으로 재확인하세요.</b></div>';
+  w.innerHTML='<div class="nb"><b>📌 서류 준비 가이드</b><br>8개교 모두 2027 모집요강 기준으로 작성되었습니다. 단, 자소서 글자수·추천서 양식 등 세부사항은 <b>원서접수 전 반드시 각 학교 공식 요강으로 최종 확인하세요.</b></div>';
   DATA.schools.forEach(sc=>{
     const d=sc.docs;
     const card=document.createElement('div');card.className='dsc2';
