@@ -193,7 +193,7 @@ function buildTL(){
     const {t:dt,c:dc}=ddT(ev.start);
     const card=document.createElement('div');card.className='ec'+(df(ev.start)<0?' past':'');
     const head=document.createElement('div');head.className='ech';
-    head.innerHTML=`<div class="ed ${DC[ev.key]||'dot-apply'}"></div><div class="edt">${fmt(ev.start)}${ev.list[0]?.st?.time?`<span class="etm"> ${ev.list[0].st.time}</span>`:''}<small>${SL[ev.key]||ev.key}</small></div><div class="etg">${ev.list.map(({sc})=>`<span class="stag ${SC[ev.key]||'tag-apply'}">${sc.short}</span>`).join('')}</div><div class="edd ${dc}">${dt}</div>`;
+    head.innerHTML=`<div class="ed ${DC[ev.key]||'dot-apply'}"></div><div class="edt">${fmt(ev.start)}<small>${SL[ev.key]||ev.key}</small></div><div class="etg">${ev.list.map(({sc})=>`<span class="stag ${SC[ev.key]||'tag-apply'}">${sc.short}</span>`).join('')}</div><div class="edd ${dc}">${dt}</div>`;
     const body=document.createElement('div');body.className='ecb';
     ev.list.forEach(({sc,st})=>{const row=document.createElement('div');row.className='dr';row.innerHTML=`<div class="dsc">${sc.short}</div><div class="di"><b>${st.label} · ${fmtR(st.start,st.end)}${st.time?' '+st.time:''}</b><span class="sub">${st.detail}</span></div><a class="dl" href="${sc.url}" target="_blank">공홈↗</a>`;body.appendChild(row)});
     head.onclick=()=>body.classList.toggle('open');card.appendChild(head);card.appendChild(body);tw.appendChild(card);
@@ -258,7 +258,7 @@ function buildInfo(){
   w.innerHTML='<div class="inote"><b>⚠️ 공통 필독</b><br>· <b>8개교 중복지원 절대 불가</b> — 적발 시 전형 제외<br>· 의약계열 진학 제재 동의 필수<br>· <b>지역의사제 지원 불가</b><br>· 전형료 납부 후 취소·환불 불가</div>';
   DATA.schools.forEach(sc=>{
     const card=document.createElement('div');card.className='ic';
-    const sh=sc.stages.map(st=>{const{t,c}=ddT(st.start);return`<div class="isr"><div class="isl">${SL[st.key]||st.key}</div><div class="isd">${fmtR(st.start,st.end)}</div><div class="edd ${c}" style="font-size:10px;padding:1px 7px;border-radius:20px">${t}</div></div>`}).join('');
+    const sh=sc.stages.map(st=>{const{t,c}=ddT(st.start);return`<div class="isr"><div class="isl">${SL[st.key]||st.key}</div><div class="isd">${fmtR(st.start,st.end)}${st.time?' '+st.time:''}</div><div class="edd ${c}" style="font-size:10px;padding:1px 7px;border-radius:20px">${t}</div></div>`}).join('');
     card.innerHTML=`<div class="ich"><div class="icn">${sc.name}</div><div class="icl">${sc.loc}</div><div class="icq">정원 ${sc.quota}명</div></div><div class="icno">${sc.note}</div><a class="ilb" href="${sc.url}" target="_blank">🔗 공식 입학 홈페이지</a><div style="margin-top:12px">${sh}</div>`;
     w.appendChild(card);
   });
