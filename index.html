@@ -40,8 +40,8 @@ nav button:hover:not(.on){color:var(--text)}
 .etg{flex:1;display:flex;flex-wrap:wrap;gap:4px}
 .stag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px}
 .edd{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;flex-shrink:0}
-.dot-apply{background:var(--blue)}.dot-s1{background:var(--blue-mid)}.dot-s2{background:var(--gold2)}.dot-s2f{background:var(--gold2)}.dot-s3{background:#E07B3A}.dot-final{background:var(--green)}
-.tag-apply{background:var(--blue-bg);color:var(--blue)}.tag-s1{background:#E3F1FB;color:var(--blue-mid)}.tag-s2{background:var(--gold-bg);color:var(--gold2)}.tag-s2f{background:var(--gold-bg);color:var(--gold2)}.tag-s3{background:#FEF3EB;color:#C0602A}.tag-final{background:var(--green-bg);color:var(--green)}
+.dot-apply{background:var(--blue)}.dot-s1{background:var(--blue-mid)}.dot-s2{background:var(--gold2)}.dot-s2f{background:#7C5CBF}.dot-s3{background:#E07B3A}.dot-final{background:var(--green)}
+.tag-apply{background:var(--blue-bg);color:var(--blue)}.tag-s1{background:#E3F1FB;color:var(--blue-mid)}.tag-s2{background:var(--gold-bg);color:var(--gold2)}.tag-s2f{background:#F0EBF8;color:#7C5CBF}.tag-s3{background:#FEF3EB;color:#C0602A}.tag-final{background:var(--green-bg);color:var(--green)}
 .dd-past{background:#F0EFED;color:var(--faint)}.dd-today{background:var(--red);color:#fff}.dd-soon{background:var(--red);color:#fff;animation:blink 1.4s infinite}.dd-near{background:#FEF3EB;color:#C0602A;border:1px solid #FCDDC7}.dd-far{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.6}}
 .ecb{display:none;border-top:1.5px solid var(--border);background:var(--surface2);padding:10px 14px}.ecb.open{display:block}
@@ -97,7 +97,6 @@ nav button:hover:not(.on){color:var(--text)}
 .isr{display:flex;gap:8px;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);align-items:center}.isr:last-child{border-bottom:none}
 .isl{color:var(--faint);min-width:90px;flex-shrink:0;font-size:11px}
 .isd{font-weight:600;flex:1}
-
 /* ── HEADER REDESIGN ── */
 .hi{display:flex;align-items:center;gap:0;padding:0;position:relative;overflow:hidden;min-height:64px}
 .hi::before{content:'CORE-8';position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:72px;font-weight:900;color:rgba(255,255,255,.04);letter-spacing:-2px;pointer-events:none;line-height:1}
@@ -148,11 +147,10 @@ nav button:hover:not(.on){color:var(--text)}
   <div id="tab-info" class="tab"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
 </div>
 <script>
-// ★ GAS 웹앱 배포 후 URL을 여기에 붙여넣으세요
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwoIg5ZVDXBdxN-HsLvUnbM9tqj-2hWebm70dIl-QcERUGTLhVxfQhw2XHw0IMwzx4q/exec';
 
 const TODAY=new Date(),DAYS=['일','월','화','수','목','금','토'];
-const SL={apply:'원서접수',s1:'1단계(서류) 결과발표',s2:'2단계(지필)',s2f:'2단계(지필) 결과발표,s3:'3단계(영재성)',final:'최종발표'};
+const SL={apply:'원서접수',s1:'1단계 결과발표',s2:'2단계(지필)',s2f:'2단계 결과발표',s3:'3단계(영재성)',final:'최종발표'};
 const SC={apply:'tag-apply',s1:'tag-s1',s2:'tag-s2',s2f:'tag-s2f',s3:'tag-s3',final:'tag-final'};
 const DC={apply:'dot-apply',s1:'dot-s1',s2:'dot-s2',s2f:'dot-s2f',s3:'dot-s3',final:'dot-final'};
 function pd(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
@@ -167,7 +165,7 @@ async function load(){
     const r=await fetch(GAS_URL);
     DATA=await r.json();
     FS=new Set(DATA.schools.map(s=>s.id));
-    let ev=[];DATA.schools.forEach(sc=>sc.stages.forEach(st=>{const d=df(st.start);if(d>=0)ev.push({d,t:`${sc.short} ${SL[st.key]}`})}));
+    let ev=[];DATA.schools.forEach(sc=>sc.stages.forEach(st=>{const d=df(st.start);if(d>=0)ev.push({d,t:`${sc.short} ${SL[st.key]||st.key}`})}));
     ev.sort((a,b)=>a.d-b.d);
     document.getElementById('nextEvt').textContent=ev.length?`▶ ${ev[0].t} D-${ev[0].d}`:'전형 완료';
     buildTL();buildDocs();buildCL();buildInfo();
@@ -195,7 +193,7 @@ function buildTL(){
     const {t:dt,c:dc}=ddT(ev.start);
     const card=document.createElement('div');card.className='ec'+(df(ev.start)<0?' past':'');
     const head=document.createElement('div');head.className='ech';
-    head.innerHTML=`<div class="ed ${DC[ev.key]}"></div><div class="edt">${fmt(ev.start)}<small>${SL[ev.key]}</small></div><div class="etg">${ev.list.map(({sc})=>`<span class="stag ${SC[ev.key]}">${sc.short}</span>`).join('')}</div><div class="edd ${dc}">${dt}</div>`;
+    head.innerHTML=`<div class="ed ${DC[ev.key]||'dot-apply'}"></div><div class="edt">${fmt(ev.start)}<small>${SL[ev.key]||ev.key}</small></div><div class="etg">${ev.list.map(({sc})=>`<span class="stag ${SC[ev.key]||'tag-apply'}">${sc.short}</span>`).join('')}</div><div class="edd ${dc}">${dt}</div>`;
     const body=document.createElement('div');body.className='ecb';
     ev.list.forEach(({sc,st})=>{const row=document.createElement('div');row.className='dr';row.innerHTML=`<div class="dsc">${sc.short}</div><div class="di"><b>${st.label} · ${fmtR(st.start,st.end)}</b><span class="sub">${st.detail}</span></div><a class="dl" href="${sc.url}" target="_blank">공홈↗</a>`;body.appendChild(row)});
     head.onclick=()=>body.classList.toggle('open');card.appendChild(head);card.appendChild(body);tw.appendChild(card);
@@ -241,7 +239,7 @@ function buildCL(){
     const body=document.createElement('div');body.className='clb';
     Object.entries(DATA.checklist).forEach(([k,items])=>{
       const stg=sc.stages.find(s=>s.key===k);
-      const t=document.createElement('div');t.className='cst';t.textContent=SL[k]+(stg?` · ${fmt(stg.start)}`:'');body.appendChild(t);
+      const t=document.createElement('div');t.className='cst';t.textContent=(SL[k]||k)+(stg?` · ${fmt(stg.start)}`:'');body.appendChild(t);
       items.forEach((text,i)=>{
         const id=`${sc.id}_${k}_${i}`;
         const row=document.createElement('div');row.className='ci'+(checks[id]?' done':'');
@@ -260,7 +258,7 @@ function buildInfo(){
   w.innerHTML='<div class="inote"><b>⚠️ 공통 필독</b><br>· <b>8개교 중복지원 절대 불가</b> — 적발 시 전형 제외<br>· 의약계열 진학 제재 동의 필수<br>· <b>지역의사제 지원 불가</b><br>· 전형료 납부 후 취소·환불 불가</div>';
   DATA.schools.forEach(sc=>{
     const card=document.createElement('div');card.className='ic';
-    const sh=sc.stages.map(st=>{const{t,c}=ddT(st.start);return`<div class="isr"><div class="isl">${SL[st.key]}</div><div class="isd">${fmtR(st.start,st.end)}</div><div class="edd ${c}" style="font-size:10px;padding:1px 7px;border-radius:20px">${t}</div></div>`}).join('');
+    const sh=sc.stages.map(st=>{const{t,c}=ddT(st.start);return`<div class="isr"><div class="isl">${SL[st.key]||st.key}</div><div class="isd">${fmtR(st.start,st.end)}</div><div class="edd ${c}" style="font-size:10px;padding:1px 7px;border-radius:20px">${t}</div></div>`}).join('');
     card.innerHTML=`<div class="ich"><div class="icn">${sc.name}</div><div class="icl">${sc.loc}</div><div class="icq">정원 ${sc.quota}명</div></div><div class="icno">${sc.note}</div><a class="ilb" href="${sc.url}" target="_blank">🔗 공식 입학 홈페이지</a><div style="margin-top:12px">${sh}</div>`;
     w.appendChild(card);
   });
