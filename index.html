@@ -124,7 +124,7 @@ nav button:hover:not(.on){color:var(--text)}
 </div>
 <script>
 // ★ GAS 웹앱 배포 후 URL을 여기에 붙여넣으세요
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbw6-UCOPjsW6bRSAQ9e4Tnczlb5YMN3kCbhJGqrnXLtNo26_1xYSX-0_cQOuDZnCEXh/exec';
+const GAS_URL = 'YOUR_GAS_WEBAPP_URL_HERE';
 
 const TODAY=new Date(),DAYS=['일','월','화','수','목','금','토'];
 const SL={apply:'원서접수',s1:'1단계(서류)',s2:'2단계(지필)',s3:'3단계(영재성)',final:'최종발표'};
@@ -155,8 +155,12 @@ function buildTL(){
   const w=document.getElementById('tab-tl');w.innerHTML='';
   const fw=document.createElement('div');fw.className='sf';
   const ab=document.createElement('button');ab.textContent='전체';ab.className=FS.size===DATA.schools.length?'on':'';
-  ab.onclick=()=>{FS=new Set(DATA.schools.map(s=>s.id));buildTL()};fw.appendChild(ab);
-  DATA.schools.forEach(sc=>{const b=document.createElement('button');b.textContent=sc.short;b.className=FS.has(sc.id)?'on':'';b.onclick=()=>{if(FS.has(sc.id)){if(FS.size>1)FS.delete(sc.id)}else FS.add(sc.id);buildTL()};fw.appendChild(b)});
+  ab.onclick=()=>{
+    const allOn=FS.size===DATA.schools.length;
+    if(allOn){FS=new Set();}else{FS=new Set(DATA.schools.map(s=>s.id));}
+    buildTL();
+  };fw.appendChild(ab);
+  DATA.schools.forEach(sc=>{const b=document.createElement('button');b.textContent=sc.short;b.className=FS.has(sc.id)?'on':'';b.onclick=()=>{if(FS.has(sc.id))FS.delete(sc.id);else FS.add(sc.id);buildTL()};fw.appendChild(b)});
   w.appendChild(fw);
   const map={};
   DATA.schools.forEach(sc=>{if(!FS.has(sc.id))return;sc.stages.forEach(st=>{const k=`${st.start}__${st.key}`;if(!map[k])map[k]={start:st.start,key:st.key,list:[]};map[k].list.push({sc,st})})});
