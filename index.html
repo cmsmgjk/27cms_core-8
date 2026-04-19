@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 영재학교 입학전형 | CMS 크레버스</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+:root{--bg:#F2F1EF;--surface:#FFFFFF;--surface2:#F8F7F5;--border:#E0DDD9;--border2:#D0CECA;--mg-black:#111921;--text:#1A2535;--dim:#5A6678;--faint:#9AA3AD;--gold:#B4A89B;--gold2:#978B7E;--blue:#1C70BE;--blue-mid:#2E89DD;--blue-light:#53ACFF;--blue-bg:#EBF4FF;--blue-border:#BDD9F5;--gold-bg:#F7F4F1;--gold-border:#E0D8D0;--green:#1A7F5A;--green-bg:#E8F5F0;--red:#C0392B;--red-bg:#FDF0EE}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh}
+header{background:var(--mg-black);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hi{display:flex;align-items:center;gap:10px;padding:12px 16px}
+.cms-logo{background:var(--blue-mid);color:#fff;font-size:12px;font-weight:900;padding:3px 9px;border-radius:4px;letter-spacing:.5px;flex-shrink:0}
+.ht{font-size:14px;font-weight:700;color:#fff;line-height:1.3}
+.ht span{color:var(--blue-light)}
+.hm{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.mt{font-size:11px;color:#8A9BB0}
+.mn{font-size:11px;color:var(--blue-light);font-weight:600}
+nav{background:var(--surface);border-bottom:2px solid var(--border);display:flex;padding:0 12px;overflow-x:auto}
+nav button{background:none;border:none;border-bottom:2px solid transparent;color:var(--dim);font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:600;padding:11px 14px;cursor:pointer;white-space:nowrap;transition:.15s;margin-bottom:-2px}
+nav button.on{color:var(--blue);border-bottom-color:var(--blue)}
+nav button:hover:not(.on){color:var(--text)}
+.content{padding:14px 14px 40px;max-width:680px;margin:0 auto}
+.tab{display:none}.tab.on{display:block}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:12px;color:var(--faint)}
+.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{background:var(--red-bg);border:1.5px solid #F5C4BF;border-radius:8px;padding:14px;font-size:12px;color:var(--red);line-height:1.7}
+.sf{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.sf button{background:var(--surface);border:1.5px solid var(--border2);border-radius:20px;color:var(--dim);font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:700;padding:4px 12px;cursor:pointer;transition:.15s}
+.sf button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.tl{display:flex;flex-direction:column;gap:6px}
+.ec{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.ec.past{opacity:.4}
+.ech{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none}
+.ed{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.edt{font-size:13px;font-weight:700;min-width:72px;flex-shrink:0}
+.edt small{display:block;font-size:10px;font-weight:400;color:var(--faint)}
+.etg{flex:1;display:flex;flex-wrap:wrap;gap:4px}
+.stag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px}
+.edd{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;flex-shrink:0}
+.dot-apply{background:var(--blue)}.dot-s1{background:var(--blue-mid)}.dot-s2{background:var(--gold2)}.dot-s3{background:#E07B3A}.dot-final{background:var(--green)}
+.tag-apply{background:var(--blue-bg);color:var(--blue)}.tag-s1{background:#E3F1FB;color:var(--blue-mid)}.tag-s2{background:var(--gold-bg);color:var(--gold2)}.tag-s3{background:#FEF3EB;color:#C0602A}.tag-final{background:var(--green-bg);color:var(--green)}
+.dd-past{background:#F0EFED;color:var(--faint)}.dd-today{background:var(--red);color:#fff}.dd-soon{background:var(--red);color:#fff;animation:blink 1.4s infinite}.dd-near{background:#FEF3EB;color:#C0602A;border:1px solid #FCDDC7}.dd-far{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.6}}
+.ecb{display:none;border-top:1.5px solid var(--border);background:var(--surface2);padding:10px 14px}.ecb.open{display:block}
+.dr{display:grid;grid-template-columns:64px 1fr auto;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);align-items:start}.dr:last-child{border-bottom:none}
+.dsc{font-size:12px;font-weight:700;padding-top:2px}
+.di{font-size:12px;line-height:1.55;color:var(--dim)}.di b{color:var(--text);display:block;margin-bottom:2px}.di .sub{font-size:11px;opacity:.7;margin-top:2px;display:block}
+.dl{color:var(--blue);font-size:11px;text-decoration:none;padding-top:2px}.dl:hover{text-decoration:underline}
+.nb{background:var(--blue-bg);border:1.5px solid var(--blue-border);border-radius:8px;padding:11px 14px;font-size:12px;color:#1A4A7A;line-height:1.75;margin-bottom:14px}.nb b{color:var(--blue)}
+.dsc2{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.dsh{display:flex;align-items:center;gap:8px;padding:12px 14px;cursor:pointer;user-select:none;border-bottom:1.5px solid transparent;transition:background .15s}.dsh:hover{background:var(--surface2)}.dsh.oh{border-bottom-color:var(--border)}
+.sn{font-size:14px;font-weight:900}
+.sl{font-size:10px;background:var(--blue);color:#fff;padding:2px 7px;border-radius:10px;font-weight:700}
+.srb{font-size:10px;font-weight:700;background:var(--gold-bg);border:1px solid var(--gold-border);color:var(--gold2);padding:2px 8px;border-radius:10px}
+.sq{margin-left:auto;font-size:11px;color:var(--dim)}
+.sa{font-size:12px;color:var(--faint);transition:transform .2s;flex-shrink:0}.sa.open{transform:rotate(180deg)}
+.db{display:none;padding:14px}.db.open{display:block}
+.ds{margin-bottom:16px}.ds:last-child{margin-bottom:0}
+.dst{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;gap:6px;margin-bottom:8px}.dst::after{content:'';flex:1;height:1px;background:var(--blue-border)}
+.ei{background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:6px}.ei:last-child{margin-bottom:0}
+.en{display:inline-block;background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:1px 8px;border-radius:3px;margin-bottom:5px}
+.eq{font-size:13px;font-weight:500;color:var(--text);line-height:1.55}
+.el{font-size:11px;color:var(--gold2);margin-top:5px;font-weight:600;background:var(--gold-bg);display:inline-block;padding:2px 8px;border-radius:3px}
+.rt{width:100%;border-collapse:collapse}.rt th{background:var(--surface2);font-size:11px;font-weight:700;color:var(--dim);padding:6px 10px;text-align:left;border-bottom:1.5px solid var(--border)}.rt td{font-size:12px;padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}.rt tr:last-child td{border-bottom:none}
+.rty{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:2px}
+.rt-t{background:var(--blue-bg);color:var(--blue)}.rt-s{background:var(--gold-bg);color:var(--gold2)}
+.sbr{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);align-items:flex-start}.sbr:last-child{border-bottom:none}
+.sbl{font-size:11px;color:var(--faint);min-width:70px;flex-shrink:0;padding-top:1px}
+.sbv{font-size:12px;font-weight:500;flex:1;line-height:1.5}
+.sbn{font-size:11px;color:var(--dim);font-weight:400}
+.br{background:var(--red-bg);color:var(--red);border:1px solid #F5C4BF;font-size:10px;padding:2px 7px;border-radius:3px;font-weight:700}
+.bo{background:var(--gold-bg);color:var(--gold2);border:1px solid var(--gold-border);font-size:10px;padding:2px 7px;border-radius:3px;font-weight:700}
+.bn{background:#F0EFED;color:var(--faint);border:1px solid var(--border);font-size:10px;padding:2px 7px;border-radius:3px;font-weight:700}
+.cls{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.clh{display:flex;align-items:center;gap:8px;padding:11px 14px;cursor:pointer;user-select:none}.clh:hover{background:var(--surface2)}
+.chn{font-size:14px;font-weight:700}
+.chl{font-size:10px;background:var(--blue);color:#fff;padding:2px 7px;border-radius:10px;font-weight:700}
+.chp{margin-left:auto;font-size:11px;color:var(--dim)}
+.cpb{height:3px;background:var(--border)}.cpf{height:100%;background:var(--green);transition:.3s}
+.clb{display:none;padding:12px 14px;border-top:1.5px solid var(--border);background:var(--surface2)}.clb.open{display:block}
+.cst{font-size:10px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 6px;display:flex;align-items:center;gap:6px}.cst::after{content:'';flex:1;height:1px;background:var(--border)}.cst:first-child{margin-top:0}
+.ci{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);cursor:pointer}.ci:last-child{border-bottom:none}
+.ci input[type=checkbox]{width:16px;height:16px;accent-color:var(--blue);flex-shrink:0;margin-top:1px;cursor:pointer}
+.ct{font-size:13px;line-height:1.4;flex:1}
+.ci.done .ct{text-decoration:line-through;color:var(--faint)}
+.inote{background:#FFF8E6;border:1.5px solid #F5E4A0;border-radius:8px;padding:11px 14px;font-size:12px;color:#5A4A00;line-height:1.8;margin-bottom:14px}.inote b{color:#8A6500}
+.ic{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;margin-bottom:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.ich{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.icn{font-size:15px;font-weight:900}
+.icl{font-size:10px;background:var(--surface2);border:1.5px solid var(--border);color:var(--dim);padding:2px 8px;border-radius:10px}
+.icq{margin-left:auto;font-size:12px;color:var(--dim)}
+.icno{font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:10px}
+.ilb{display:inline-flex;align-items:center;gap:5px;background:var(--blue-bg);border:1.5px solid var(--blue-border);color:var(--blue);font-size:12px;padding:5px 12px;border-radius:6px;text-decoration:none;transition:.15s;font-weight:600}.ilb:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.isr{display:flex;gap:8px;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);align-items:center}.isr:last-child{border-bottom:none}
+.isl{color:var(--faint);min-width:90px;flex-shrink:0;font-size:11px}
+.isd{font-weight:600;flex:1}
+</style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <span class="cms-logo">CMS</span>
+    <div class="ht"><span>2027</span> 영재학교 입학전형</div>
+    <div class="hm">
+      <div class="mt" id="todayStr"></div>
+      <div class="mn" id="nextEvt">로딩 중…</div>
+    </div>
+  </div>
+</header>
+<nav>
+  <button class="on" onclick="switchTab('tl',this)">📅 전형 일정</button>
+  <button onclick="switchTab('docs',this)">📋 서류 준비</button>
+  <button onclick="switchTab('cl',this)">✅ 체크리스트</button>
+  <button onclick="switchTab('info',this)">ℹ️ 학교 정보</button>
+</nav>
+<div class="content">
+  <div id="tab-tl" class="tab on"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
+  <div id="tab-docs" class="tab"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
+  <div id="tab-cl" class="tab"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
+  <div id="tab-info" class="tab"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
+</div>
+<script>
+// ★ GAS 웹앱 배포 후 URL을 여기에 붙여넣으세요
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbw6-UCOPjsW6bRSAQ9e4Tnczlb5YMN3kCbhJGqrnXLtNo26_1xYSX-0_cQOuDZnCEXh/exec';
+
+const TODAY=new Date(),DAYS=['일','월','화','수','목','금','토'];
+const SL={apply:'원서접수',s1:'1단계(서류)',s2:'2단계(지필)',s3:'3단계(영재성)',final:'최종발표'};
+const SC={apply:'tag-apply',s1:'tag-s1',s2:'tag-s2',s3:'tag-s3',final:'tag-final'};
+const DC={apply:'dot-apply',s1:'dot-s1',s2:'dot-s2',s3:'dot-s3',final:'dot-final'};
+function pd(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
+function df(s){return Math.ceil((pd(s)-TODAY)/86400000)}
+function fmt(s){const d=pd(s);return`${d.getMonth()+1}/${d.getDate()}(${DAYS[d.getDay()]})`}
+function fmtR(s,e){return s===e?fmt(s):`${fmt(s)} ~ ${fmt(e)}`}
+function ddT(s){const d=df(s);if(d<0)return{t:`D+${Math.abs(d)}`,c:'dd-past'};if(d===0)return{t:'D-DAY',c:'dd-today'};if(d<=7)return{t:`D-${d}`,c:'dd-soon'};if(d<=30)return{t:`D-${d}`,c:'dd-near'};return{t:`D-${d}`,c:'dd-far'}}
+document.getElementById('todayStr').textContent=`${TODAY.getFullYear()}.${String(TODAY.getMonth()+1).padStart(2,'0')}.${String(TODAY.getDate()).padStart(2,'0')} (${DAYS[TODAY.getDay()]})`;
+let DATA=null,FS=new Set();
+async function load(){
+  try{
+    const r=await fetch(GAS_URL);
+    DATA=await r.json();
+    FS=new Set(DATA.schools.map(s=>s.id));
+    let ev=[];DATA.schools.forEach(sc=>sc.stages.forEach(st=>{const d=df(st.start);if(d>=0)ev.push({d,t:`${sc.short} ${SL[st.key]}`})}));
+    ev.sort((a,b)=>a.d-b.d);
+    document.getElementById('nextEvt').textContent=ev.length?`▶ ${ev[0].t} D-${ev[0].d}`:'전형 완료';
+    buildTL();buildDocs();buildCL();buildInfo();
+  }catch(e){
+    ['tab-tl','tab-docs','tab-cl','tab-info'].forEach(id=>document.getElementById(id).innerHTML=`<div class="err">⚠️ 데이터 로드 실패. GAS_URL을 확인하세요.<br><small>${e.message}</small></div>`);
+  }
+}
+load();
+function buildTL(){
+  const w=document.getElementById('tab-tl');w.innerHTML='';
+  const fw=document.createElement('div');fw.className='sf';
+  const ab=document.createElement('button');ab.textContent='전체';ab.className=FS.size===DATA.schools.length?'on':'';
+  ab.onclick=()=>{FS=new Set(DATA.schools.map(s=>s.id));buildTL()};fw.appendChild(ab);
+  DATA.schools.forEach(sc=>{const b=document.createElement('button');b.textContent=sc.short;b.className=FS.has(sc.id)?'on':'';b.onclick=()=>{if(FS.has(sc.id)){if(FS.size>1)FS.delete(sc.id)}else FS.add(sc.id);buildTL()};fw.appendChild(b)});
+  w.appendChild(fw);
+  const map={};
+  DATA.schools.forEach(sc=>{if(!FS.has(sc.id))return;sc.stages.forEach(st=>{const k=`${st.start}__${st.key}`;if(!map[k])map[k]={start:st.start,key:st.key,list:[]};map[k].list.push({sc,st})})});
+  const events=Object.values(map).sort((a,b)=>pd(a.start)-pd(b.start));
+  const tw=document.createElement('div');tw.className='tl';
+  events.forEach(ev=>{
+    const {t:dt,c:dc}=ddT(ev.start);
+    const card=document.createElement('div');card.className='ec'+(df(ev.start)<0?' past':'');
+    const head=document.createElement('div');head.className='ech';
+    head.innerHTML=`<div class="ed ${DC[ev.key]}"></div><div class="edt">${fmt(ev.start)}<small>${SL[ev.key]}</small></div><div class="etg">${ev.list.map(({sc})=>`<span class="stag ${SC[ev.key]}">${sc.short}</span>`).join('')}</div><div class="edd ${dc}">${dt}</div>`;
+    const body=document.createElement('div');body.className='ecb';
+    ev.list.forEach(({sc,st})=>{const row=document.createElement('div');row.className='dr';row.innerHTML=`<div class="dsc">${sc.short}</div><div class="di"><b>${st.label} · ${fmtR(st.start,st.end)}</b><span class="sub">${st.detail}</span></div><a class="dl" href="${sc.url}" target="_blank">공홈↗</a>`;body.appendChild(row)});
+    head.onclick=()=>body.classList.toggle('open');card.appendChild(head);card.appendChild(body);tw.appendChild(card);
+  });
+  if(!events.length)tw.innerHTML='<div style="color:var(--faint);font-size:13px;text-align:center;padding:30px">선택된 학교 없음</div>';
+  w.appendChild(tw);
+}
+function buildDocs(){
+  const w=document.getElementById('tab-docs');
+  w.innerHTML='<div class="nb"><b>📌 서류 준비 가이드</b><br>KSA·서울과고·경기과고는 2027 요강 확인 완료. 나머지 학교는 예년 기준이므로 <b>원서접수 전 반드시 각 학교 공식 요강으로 재확인하세요.</b></div>';
+  DATA.schools.forEach(sc=>{
+    const d=sc.docs;
+    const card=document.createElement('div');card.className='dsc2';
+    const hd=document.createElement('div');hd.className='dsh';
+    hd.innerHTML=`<span class="sn">${sc.short}</span><span class="sl">${sc.loc}</span><span class="srb">추천서 ${d.recTotal}부</span><span class="sq">${sc.name}</span><span class="sa">▼</span>`;
+    const body=document.createElement('div');body.className='db';
+    const eh=d.essay.map((e,i)=>`<div class="ei"><span class="en">항목 ${i+1}</span><div class="eq">${e.q}</div><div class="el">✏️ ${e.limit}</div></div>`).join('');
+    const rr=d.rec.map(r=>`<tr><td><span class="rty ${r.kind==='teacher'?'rt-t':'rt-s'}">${r.type}</span></td><td style="color:var(--dim);font-size:11px">${r.note}</td></tr>`).join('');
+    let pb='<span class="bn">해당없음</span>';
+    if(d.portfolio.includes('필수')||d.portfolio.includes('해당'))pb='<span class="br">확인 필요</span>';
+    else if(d.portfolio.includes('선택'))pb='<span class="bo">선택 제출</span>';
+    else if(d.portfolio==='해당없음')pb='<span class="bn">해당없음</span>';
+    body.innerHTML=`<div class="ds"><div class="dst">📝 자기소개서 (${d.essay.length}개 항목)</div>${eh}</div><div class="ds"><div class="dst">📨 추천서 (총 ${d.recTotal}부)</div><table class="rt"><thead><tr><th>추천인 유형</th><th>작성 방향</th></tr></thead><tbody>${rr}</tbody></table></div><div class="ds"><div class="dst">📚 학교생활기록부</div><div class="sbr"><div class="sbl">제출 방법</div><div class="sbv">${d.sb.method}</div></div><div class="sbr"><div class="sbl">제출 범위</div><div class="sbv">${d.sb.count}</div></div>${d.sb.note?`<div class="sbr"><div class="sbl">주의사항</div><div class="sbv sbn">${d.sb.note}</div></div>`:''}</div><div class="ds"><div class="dst">🗂️ 포트폴리오</div><div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">${pb}<div style="font-size:12px;color:var(--dim);line-height:1.6;flex:1">${d.portfolioNote||'없음'}</div></div></div>`;
+    const arr=hd.querySelector('.sa');
+    hd.onclick=()=>{const o=body.classList.toggle('open');arr.classList.toggle('open',o);hd.classList.toggle('oh',o)};
+    card.appendChild(hd);card.appendChild(body);w.appendChild(card);
+  });
+}
+function gC(){try{return JSON.parse(localStorage.getItem('ys27')||'{}')}catch{return{}}}
+function sC(o){try{localStorage.setItem('ys27',JSON.stringify(o))}catch{}}
+function buildCL(){
+  const w=document.getElementById('tab-cl');
+  w.innerHTML='<div style="font-size:12px;color:var(--dim);margin-bottom:12px">학교 이름을 탭하면 펼쳐집니다. 체크 내용은 브라우저에 저장됩니다.</div>';
+  const checks=gC();
+  DATA.schools.forEach(sc=>{
+    let total=0,done=0;
+    Object.entries(DATA.checklist).forEach(([k,items])=>items.forEach((_,i)=>{total++;if(checks[`${sc.id}_${k}_${i}`])done++}));
+    const pct=total?Math.round(done/total*100):0;
+    const el=document.createElement('div');el.className='cls';
+    const hdr=document.createElement('div');hdr.className='clh';
+    hdr.innerHTML=`<span class="chn">${sc.short}</span><span class="chl">${sc.loc}</span><span class="chp">${done}/${total} · ${pct}%</span>`;
+    const pbw=document.createElement('div');pbw.className='cpb';const pbf=document.createElement('div');pbf.className='cpf';pbf.style.width=pct+'%';pbw.appendChild(pbf);
+    const body=document.createElement('div');body.className='clb';
+    Object.entries(DATA.checklist).forEach(([k,items])=>{
+      const stg=sc.stages.find(s=>s.key===k);
+      const t=document.createElement('div');t.className='cst';t.textContent=SL[k]+(stg?` · ${fmt(stg.start)}`:'');body.appendChild(t);
+      items.forEach((text,i)=>{
+        const id=`${sc.id}_${k}_${i}`;
+        const row=document.createElement('div');row.className='ci'+(checks[id]?' done':'');
+        const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!checks[id];
+        cb.onchange=()=>{const c=gC();c[id]=cb.checked;sC(c);buildCL()};
+        const txt=document.createElement('span');txt.className='ct';txt.textContent=text;
+        row.appendChild(cb);row.appendChild(txt);body.appendChild(row);
+      });
+    });
+    hdr.onclick=()=>body.classList.toggle('open');
+    el.appendChild(hdr);el.appendChild(pbw);el.appendChild(body);w.appendChild(el);
+  });
+}
+function buildInfo(){
+  const w=document.getElementById('tab-info');
+  w.innerHTML='<div class="inote"><b>⚠️ 공통 필독</b><br>· <b>8개교 중복지원 절대 불가</b> — 적발 시 전형 제외<br>· 의약계열 진학 제재 동의 필수<br>· <b>지역의사제 지원 불가</b><br>· 전형료 납부 후 취소·환불 불가</div>';
+  DATA.schools.forEach(sc=>{
+    const card=document.createElement('div');card.className='ic';
+    const sh=sc.stages.map(st=>{const{t,c}=ddT(st.start);return`<div class="isr"><div class="isl">${SL[st.key]}</div><div class="isd">${fmtR(st.start,st.end)}</div><div class="edd ${c}" style="font-size:10px;padding:1px 7px;border-radius:20px">${t}</div></div>`}).join('');
+    card.innerHTML=`<div class="ich"><div class="icn">${sc.name}</div><div class="icl">${sc.loc}</div><div class="icq">정원 ${sc.quota}명</div></div><div class="icno">${sc.note}</div><a class="ilb" href="${sc.url}" target="_blank">🔗 공식 입학 홈페이지</a><div style="margin-top:12px">${sh}</div>`;
+    w.appendChild(card);
+  });
+}
+function switchTab(id,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');btn.classList.add('on')}
+</script>
+</body>
+</html>
