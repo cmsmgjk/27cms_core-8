@@ -113,6 +113,20 @@ nav{background:var(--surface);border-bottom:1.5px solid var(--border);display:fl
 .header-right{padding:10px 14px;display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0}
 .mt{font-size:10px;color:rgba(255,255,255,.3)}
 .mn{font-size:10px;color:#B4A89B;font-weight:600;text-align:right}.etm{font-size:11px;font-weight:500;color:var(--blue);margin-left:2px}
+
+/* ── BLOG BANNER ── */
+.blog-banner-hd{display:flex;align-items:center;gap:8px;padding:10px 16px;cursor:pointer;user-select:none;transition:background .15s}
+.blog-banner-hd:hover{background:var(--border)}
+.blog-banner-txt{font-size:11px;font-weight:700;color:var(--gold2);letter-spacing:.3px;flex:1}
+.blog-banner-arr{font-size:10px;color:var(--faint);transition:transform .2s}
+.blog-banner-arr.open{transform:rotate(180deg)}
+.blog-banner-body{display:none;padding:0 16px 14px}
+.blog-banner-body.open{display:block}
+.blog-desc{font-size:10px;color:var(--faint);margin-bottom:8px}
+.blog-links{display:flex;flex-wrap:wrap;gap:5px}
+.blog-link{font-size:11px;font-weight:700;color:var(--gold2);background:#F0EDE9;border:1px solid var(--border2);border-radius:5px;padding:4px 10px;text-decoration:none;transition:.15s}
+.blog-link:hover{background:var(--gold2);color:#fff}  
+  
 </style>
 </head>
 <body>
@@ -150,9 +164,32 @@ nav{background:var(--surface);border-bottom:1.5px solid var(--border);display:fl
   <div id="tab-cl" class="tab"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
   <div id="tab-info" class="tab"><div class="loading"><div class="spinner"></div><div>데이터 불러오는 중…</div></div></div>
 </div>
-<footer style="text-align:right;padding:10px 16px;background:var(--surface2);border-top:1px solid var(--border)">
-  <span style="font-size:10px;color:var(--gold);letter-spacing:.3px">made by <b style="color:var(--gold2);font-weight:600">JK</b></span>
+
+<footer style="background:var(--surface2);border-top:1px solid var(--border)">
+  <div class="blog-banner-hd" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.blog-banner-arr').classList.toggle('open')">
+    <span class="blog-banner-txt">🏫 CMS영재관 입시반 운영 캠퍼스</span>
+    <span class="blog-banner-arr">▼</span>
+  </div>
+  <div class="blog-banner-body">
+    <div class="blog-desc">영재학교 입시반을 운영 중인 캠퍼스입니다. 탭하면 블로그로 이동합니다.</div>
+    <div class="blog-links">
+      <a class="blog-link" href="https://blog.naver.com/gacms0505" target="_blank">관악</a>
+      <a class="blog-link" href="https://blog.naver.com/cmsedudc1" target="_blank">대치</a>
+      <a class="blog-link" href="https://blog.naver.com/cmsmpy" target="_blank">마포</a>
+      <a class="blog-link" href="https://blog.naver.com/cmsedumdy" target="_blank">목동</a>
+      <a class="blog-link" href="https://blog.naver.com/cmsjg5005" target="_blank">중계</a>
+      <a class="blog-link" href="https://blog.naver.com/bccmsedu" target="_blank">부천</a>
+      <a class="blog-link" href="https://blog.naver.com/cms7151881" target="_blank">분당</a>
+      <a class="blog-link" href="https://blog.naver.com/cmssd1" target="_blank">송도</a>
+      <a class="blog-link" href="https://blog.naver.com/cms1san" target="_blank">일산</a>
+      <a class="blog-link" href="https://blog.naver.com/creversepc" target="_blank">평촌</a>
+    </div>
+  </div>
+  <div style="text-align:right;padding:10px 16px;border-top:1px solid var(--border)">
+    <span style="font-size:10px;color:var(--gold);letter-spacing:.3px">made by <b style="color:var(--gold2);font-weight:600">JK</b></span>
+  </div>
 </footer>
+  
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwoIg5ZVDXBdxN-HsLvUnbM9tqj-2hWebm70dIl-QcERUGTLhVxfQhw2XHw0IMwzx4q/exec';
 
